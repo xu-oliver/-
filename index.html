@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	
+	
+	<!--<link rel="stylesheet" type="text/css" href="css/zTreeStyle.css"/>-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="css/awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/flat-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="css/xgy.css"/>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+	
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/controller.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.ztree.exedit.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/addJs.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://webapi.amap.com/maps?v=1.3&key=ff67af79d08ace9c0edb4cc28e4de7f8&callback=init" type="text/javascript" charset="utf-8"></script>
+		
+
+</head>
+<body ng-app="myTodo">
+<div ng-include="'tpl/new.html'"></div>
+<ng-view></ng-view>
+
+
+
+<script type="text/javascript">
+function tiHuan(id){
+	$(".sque").show(function(){
+		this.className = "sque";
+	})
+	$(".sque_db").show(function(){
+		this.className = "sque";
+	})
+	document.getElementById(id).className = "sque_db";
+	console.log()
+}
+function closeFloat(){
+	$(".ding").addClass("yincang");
+}
+function thTab(id){
+	let value,name;
+	var str = id;//返回该页面的url
+	var num = 0;//检测？的位置
+	str = str.substr(num);//从这个位置开始分割参数
+	var arr = str.split("_");//分割参数，并且分割为数组
+	for(var i = 0;i < arr.length;i++){
+		num = arr[i].indexOf("=");
+		if(num > 0){
+			name = arr[i].substr(0,num);
+			value = arr[i].substr(num + 1);
+			this[name] = value;
+		}
+	}
+	$(".xian").removeClass("xian").addClass("yin");
+	$(".qieHuan1").removeClass("qieHuan1").addClass("qieHuan0");
+	document.getElementById(arr[0]).className = "qieHuan1";
+	document.getElementById(id).className = "xian";
+}
+function addEdit(id){
+	console.log("s")
+	$(".onLine>div>.addInput").removeAttr("readonly");
+	if($(".onLine>div>.addInput").length>0){
+		$("#Center").css("display","block");
+		$("#"+id).css("display","none");
+		$("#editBut").css("display","block");
+	}
+	$(".onLine>div>.addInput").removeClass("addInput").addClass("addInputT");
+
+}
+function removeInput(){
+	$(".onLine>div>.addInputT").removeClass("addInputT").addClass("addInput").attr("readOnly","readOnly");
+	$("#Center").css("display","none");
+	$("#editBut").css("display","none");
+	$("#editImg").css("display","block");
+}
+</script>
+
+</body>
+</html>
